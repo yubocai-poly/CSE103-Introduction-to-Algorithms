@@ -8,24 +8,15 @@ Yubo Cai
 # Exercise 1 - asymptotic notation 渐进分析
 """
 1. True since n^2 + 100n + 2 = O(n^2) and n^2 < n^3, therefore is True
-
 2. True since 75n^3 + 17 = O(n^3), therefore is True_
-
 3. False, Since n^4 > n^3
-
 4. False, since n^2 + 10n + 6 = Θ(n^3) also means that n^3 = O(n^2) which is not corrects
-
 5. True, we can prove this with trying to find the limit of log(n)/n^epsilon, using the L'hospital 用洛必达法则求极限，然后上面是log和Fln没有区别
 因此可以求出极限为0
-
 6. True, we can simply and compare with log(n) and n^0.5, from the conclusion from question 5 we can have thie one is True. 
-
 7. False, since n^2log(n) > n^2
-
 8. False, since nlog(n) > nlog
-
 9. False, since we can consider f(n) = 2n g(n) = n, then we can find 4^n != O(2^n) and 4^n = O(4^n) which implies this two is not equality
-
 10. True
 """
 
@@ -33,16 +24,11 @@ Yubo Cai
 # Exercise 2 -
 """
 1. We may apply the Master Theorem with a = 3, b = 2 and c = 2:  we have a < b^c, so T(n) = Θ(n^2).
-
 2. We may apply the Master Theorem with a = 4, b = 2 and c = 2:  we have a = b^c, so T(n) = Θ(n^2log(n))
-
 3. We may apply the Master Theorem with a = 16, b = 4 and c = 1:  we have a > b^c, so T(n) = Θ(n^(log(b a)))= Θ(n^2)
-
 4. This question the master theorem do not apply so we may use the tree method, we find the solution that Θ(n) since we have that 
 f(n) = 5/2n 运用等比数列的公式进行计算
-
 5. T(n) = Θ(nlog^2(n))
-
 6. We may apply the Master Theorem with a = 3, b = 3 and c = 1/2:  we have a > b^c, therefore T(n) = Θ(n)
 """
 
@@ -119,7 +105,6 @@ def mystery(ml, nl):
     ----------
     ml ,nl : list
     two non - negative integers represented as lists of digits
-
     Returns
     -------
     ???
@@ -242,13 +227,11 @@ def mul (k , m ):
     c = mul ( k2 , m2 )     # O(T(n/2))
     b = mul ( k1 + k2 , m1 + m2 ) - a - c     # O(T(n/2)) + O(n)
     return a * 10**(h*2) + b * 10**h + c # O(n)
-
 1. assignments, any operation on bounded-size integers (variables in green): cost O(1);
 2. getting the number of digits of an arbitrary integer: cost O(1);
 3. multiplying or dividing an arbitrary integer by 10^n, or taking modulo 10^n: cost O(n);
 4. adding or subtracting two n-digit numbers: O(n)
 5. multiplying two 1-digit numbers: O(1)
-
 Therefore we have the complexity of T(n) = 3T(n/2) + O(n) with a = 3 b = 2 and c = 1
 then we have T(n) = O(n^log2 3) which is not the same as T(n) = Θ(n^2)
 """
@@ -295,7 +278,6 @@ since we have a three-time loop, therefore the complextity is T(n) = Θ(n^3)
 T(n) = 8T(n/2) + O(n^2)
 a = 4 b = 2 and c = 2 since a > b^c
 T(n) = Θ(n^3)
-
 however is we apply the Strassen’s algorithm we only need 7 recursion instead of 8
 then we have T(n) = 7T(n/2) + O(n^2)
 a = 7 b = 2 and c = 2 since a > b^c
