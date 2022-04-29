@@ -46,6 +46,7 @@ def binary_search_improve(a, l, start=0, end=-1):
 """
 So I try to apply the method from last semester about the binary search which is in place, we set two auxiliary index start and end
 and use mid of the l[start:end] and to binary search both sides
+在写的过程中最主要的是注重index
 """
 
 # ######################################################################################################################################
@@ -57,7 +58,7 @@ and use mid of the l[start:end] and to binary search both sides
 """
 
 
-def merge(l1, l2):
+def merge(l1, l2):  # merge的list一定要是从小到大排列
     n1 = len(l1)
     n2 = len(l2)
     if n1 + n2 <= 1:
@@ -101,6 +102,7 @@ def mergesort(l):
 
 
 """
+当每个只有一个元素的list是按顺序的，因此最后一行分解成只有单元素的list，然后按照顺序merge起来
 https://www.youtube.com/watch?v=cVZMah9kEjI
 """
 
@@ -135,6 +137,7 @@ def insertion_sort(l):
 
     return l
 
+# complexity: T(n) = Θ(n^2) since there is a "for" loop and a "while" loop inside
 
 """
 https://www.youtube.com/watch?v=R_wDA-PmGE4
@@ -177,7 +180,7 @@ def partition(l, b, e):
     for i in range(b, e):
         if l[i] < pivot:
             l[i], l[p] = l[p], l[i]
-            p += 1
+            p += 1 
     l[p], l[e] = l[e], l[p]
     return p
 
@@ -270,13 +273,13 @@ Out[7]: [('frank', 198, 57), ('charles', 174, 59), ('david', 167, 83)]
 """https://www.youtube.com/watch?v=XiuSW_mEn7g&t=23s"""
 
 
-def lexsort(l, m, k):
+def lexsort(l, m, k):  # 按照每个key的位置来排序
     for i in range(m):
         l = csort(l, m - i - 1, k)
     return l
 
 
-def maximum(l):
+def maximum(l):  # 取最大值
     i = 0
     for el in l:
         if el > i:
@@ -284,7 +287,7 @@ def maximum(l):
     return i
 
 
-def declen(n):
+def declen(n):  # 求出n的位数
     if n == 0:
         return 1
     i = 0
@@ -294,7 +297,7 @@ def declen(n):
     return i
 
 
-def decexp(n, m):
+def decexp(n, m):  # (1203, 3) 最后出来的结果是[2, 0, 3]以此类推
     l = [0] * m
     for i in range(m):
         l[m - 1 - i] = n % 10
@@ -302,7 +305,7 @@ def decexp(n, m):
     return l
 
 
-def deccmp(l):
+def deccmp(l):  # decexp的逆向过程
     b = 1
     n = 0
     m = len(l)
@@ -313,21 +316,20 @@ def deccmp(l):
 
 
 def radixsort(l):
-    if len(l) == 0:
-        return l
+    mx = maximum(l)  # 求出整个list的最大值
+    m = declen(mx)  # 求出这个最大值的位数
     n = len(l)
-    mx = maximum(l)
-    m = declen(mx)
     d = [0] * n
     for i in range(n):
-        d[i] = decexp(l[i], m)
-    d = lexsort(d, m, 10)
+        d[i] = decexp(l[i], m)  # 按照最大数mx的位数，来返回给list
+    d = lexsort(d, m, 10)  # 根据返回的list来进行排列，进行基数排列
     for i in range(n):
-        l[i] = deccmp(d[i])
-    return l
+        l[i] = deccmp(d[i])  # 然后再把这些list返回给三位数
+
 
 # ######################################################################################################################################
 # Exercise 8 - stability - 基数排列
+
 
 # Mergeosrt with the key
 def mergekey(l1, l2, k):
@@ -372,6 +374,7 @@ def mergesortkey(l, k):
         right[i] = l[mid + i]
     return mergekey(mergesortkey(left, k), mergesortkey(right, k), k)
 
+
 # Insertion sort with key
 def insertion_sort_key(l, key):
     n = len(l)
@@ -386,6 +389,7 @@ def insertion_sort_key(l, key):
             j -= 1
 
     return l
+
 
 # Lomuto quicksort with key
 def quicksort_key(l, key):
@@ -409,6 +413,7 @@ def partition_key(l, b, e, key):
             p += 1
     l[p], l[e] = l[e], l[p]
     return p
+
 
 # quicksort with Hoare’s partitioning scheme with key
 def quicksort1_key(l, key):
